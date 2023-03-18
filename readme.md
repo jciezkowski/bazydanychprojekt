@@ -1,6 +1,6 @@
 skład grupy: Dawid Kardacz, Jakub Pilch, Jan Ciężkowski
 
-temat: serwis do przeglądania i oceniania filmów oraz muzyki
+temat: serwis oraz sklep kolekcjonerski z płytami winylowymi
 
 link do repozytorium: https://github.com/jciezkowski/bazydanychprojekt
 
