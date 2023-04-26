@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<style>
+  table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h1>Clients</h1>
+<!-- <ul>
+  {% for x in myvinyls %}
+    <li>{{ x.title }} {{ x.artist }}</li>
+  {% endfor %}
+</ul> -->
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Address</th>
+  </tr>
+  {% for x in allclients %}
+     
+    <tr>
+      <th>{{ x.name }}</th>
+      <th>{{ x.surname }}</th>
+      <th>{{x.address}}</th>
+    </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>

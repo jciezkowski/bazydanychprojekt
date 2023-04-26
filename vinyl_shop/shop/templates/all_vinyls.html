@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<style>
+  table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h1>Vinyls</h1>
+<!-- <ul>
+  {% for x in myvinyls %}
+    <li>{{ x.title }} {{ x.artist }}</li>
+  {% endfor %}
+</ul> -->
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>Genre</th>
+    <th>Description</th>
+  </tr>
+  {% for x in myvinyls %}
+     
+    <tr>
+      <th>{{ x.title }}</th>
+      <th>{{ x.artist }}</th>
+      <th>{{x.genre}}</th>
+      <th>{{x.description}}</th>
+    </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
