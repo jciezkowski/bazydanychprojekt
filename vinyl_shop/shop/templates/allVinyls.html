@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <link rel="stylesheet" href="{% static 'stylesVinylList.css'%}">
+    <title>Lista winyli</title>
+</head>
+<body>
+  <div class="header">
+    <a href="/">
+        <div class="logo">
+            <img src="{% static 'img/vinyl.png'%}" alt="">
+        </div>
+    </a>
+    <a href="/">
+        <h1>🎵Vinyllo🎵</h1>
+    </a>
+    <div class="menus">
+        <a href="/vinyls">Lista dostępnych winyli</a>
+        <a href="/adminPanel">Panel Admina</a>
+    </div>
+</div>
+    <div class="mainPanel">
+        <h1>Lista winyli</h1>
+        <div class="vinylPanel">
+            <!-- Loop through books -->
+            {% for vinyl in vinyls %}
+            <div class="vinylContainer">
+              <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
+                <div class="infoPanel">
+                  <p>Tytuł: {{vinyl.title}}</p>
+                  <p>Wykonawca: {{vinyl.artist}}</p>
+                  <p>Gatunek: {{vinyl.genre}}</p>
+                  <p>Opis: {{vinyl.description}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="stopka">
+      <p>Kontakt</p>
+      <p>Telefon: 123 456 789</p>
+      <p>Adres mailowy: vinyllo@music.com</p>
+  </div>
+</body>
+</html>

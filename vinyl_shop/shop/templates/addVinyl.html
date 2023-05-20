@@ -23,15 +23,13 @@
         </div>
     </div>
     <div class="mainPanel">
-        <h1>Najlepszy wybór</h1>
-        <div class="vinylPanel">
-            {% for vinyl in mainVinyls %}
-            <div class="vinylContainer">
-                <p>{{ vinyl.title }}</p>
-                <p>{{ vinyl.artist }}</p>
-                <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
-            </div>
-            {% endfor %}
+        <h1>Pomyślnie dodano</h1>
+        <div class="vinylContainer">
+            <p>Tytuł: {{vinyl.title}}</p>
+            <p>Wykonawca: {{vinyl.artist}}</p>
+            <p>Gatunek: {{vinyl.genre}}</p>
+            <p>Opis: {{vinyl.description}}</p>
+            <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="Okładka do {{vinyl.title}}">
         </div>
     </div>
     <div class="stopka">
