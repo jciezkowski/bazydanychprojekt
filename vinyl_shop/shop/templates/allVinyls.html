@@ -9,20 +9,25 @@
     <title>Lista winyli</title>
 </head>
 <body>
-  <div class="header">
-    <a href="/">
-        <div class="logo">
-            <img src="{% static 'img/vinyl.png'%}" alt="">
+    <div class="header">
+        <a href="/">
+            <div class="logo">
+                <img src="{% static 'img/vinyl.png'%}" alt="">
+            </div>
+        </a>
+        <a href="/">
+            <h1>🎵Vinyllo🎵</h1>
+        </a>
+        <div class="menus">
+            <form method="POST" action="{% url 'search' %}" role="search">
+                {% csrf_token %}
+                <input type="text" name="searchbar"></input>
+                <button type="submit">Wyszukaj</button>
+            </form>
+            <a href="/vinyls">Lista dostępnych winyli</a>
+            <a href="/adminPanel">Panel Admina</a>
         </div>
-    </a>
-    <a href="/">
-        <h1>🎵Vinyllo🎵</h1>
-    </a>
-    <div class="menus">
-        <a href="/vinyls">Lista dostępnych winyli</a>
-        <a href="/adminPanel">Panel Admina</a>
     </div>
-</div>
     <div class="mainPanel">
         <h1>Lista winyli</h1>
         <div class="vinylPanel">
@@ -35,6 +40,7 @@
                   <p>Wykonawca: {{vinyl.artist}}</p>
                   <p>Gatunek: {{vinyl.genre}}</p>
                   <p>Opis: {{vinyl.description}}</p>
+                  <p>Cena: {{vinyl.price}} zł</p>
                 </div>
             </div>
             {% endfor %}

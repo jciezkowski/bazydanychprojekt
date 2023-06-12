@@ -18,6 +18,11 @@
             <h1>🎵Vinyllo🎵</h1>
         </a>
         <div class="menus">
+            <form method="POST" action="{% url 'search' %}" role="search">
+                {% csrf_token %}
+                <input type="text" name="searchbar"></input>
+                <button type="submit">Wyszukaj</button>
+            </form>
             <a href="/vinyls">Lista dostępnych winyli</a>
             <a href="/adminPanel">Panel Admina</a>
         </div>
@@ -35,6 +40,8 @@
                 <input type="textarea" name="description" placeholder="Opis">
                 <br>
                 <input type="text" name="url" placeholder="Link do okładki">
+                <br>
+                <input type="number" name="price" placeholder="Cena">
                 <br>
                 <button type="submit">Potwierdź</button>
             </form>

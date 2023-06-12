@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <title>Sklep Vinyllo</title>
+</head>
+<body>
+    <div class="header">
+        <a href="/">
+            <div class="logo">
+                <img src="{% static 'img/vinyl.png'%}" alt="">
+            </div>
+        </a>
+        <a href="/">
+            <h1>🎵Vinyllo🎵</h1>
+        </a>
+        <div class="menus">
+            <form method="POST" action="{% url 'search' %}" role="search">
+                {% csrf_token %}
+                <input type="text" name="searchbar"></input>
+                <button type="submit">Wyszukaj</button>
+            </form>
+            <a href="/vinyls">Lista dostępnych winyli</a>
+            <a href="/adminPanel">Panel Admina</a>
+        </div>
+    </div>
+    <div class="mainPanel">
+        {% if query %}
+            <div>
+                {% if posts %}
+                    <h1>Znalezione produkty spełniające kryteria:</h1>
+                    <div class="vinylPanel">
+                    {% for post in posts %}
+                        <div class="vinylContainer">
+                            <p>{{ post.title }}</p>
+                            <p>{{ post.artist }}</p>
+                            <img class="vinyl" src="{% static 'img/'|add:post.url %}" alt="{{ post.title }}">
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <h1>Nie znaleziono poszukiwanej frazy</h1>
+                {% endif %}
+            </div>
+        {% else %}
+            <h1>Proszę wprowadzić poprawne wyszukanie</h1>
+        {% endif %}
+    </div>
+    <div class="stopka">
+        <p>Kontakt</p>
+        <p>Telefon: 123 456 789</p>
+        <p>Adres mailowy: vinyllo@music.com</p>
+    </div>
+</body>
+</html>

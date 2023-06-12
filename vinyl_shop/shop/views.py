@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import render
+from django.db.models import Q
 from .models import Vinyls, Customers
 import random
 
@@ -11,6 +13,14 @@ def allVinyls(request):
     }
     return HttpResponse(template.render(context,request))
 # Create your views here.
+
+def search(request):
+    if request.method == 'POST':
+        search_query = request.POST['searchbar']
+        posts = Vinyls.objects.filter(Q(title__icontains=search_query) | Q(artist__icontains=search_query) | Q(genre__icontains=search_query) | Q(description__icontains=search_query))
+        return render(request, 'search.html', {'query':search_query, 'posts': posts})
+    else:
+        return render(request, 'search.html', {})
 
 def clients(request):
     allCustomers = Customers.objects.all().values()
@@ -46,8 +56,9 @@ def addVinyl(request):
         genre = request.GET.get('genre')
         description = request.GET.get('description')
         url = request.GET.get('url')
+        price = request.GET.get('price')
         # Create a new Vinyl object with the form data
-        vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url)
+        vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url, price=price)
 
         # Save the object to the database
         vinyl.save()

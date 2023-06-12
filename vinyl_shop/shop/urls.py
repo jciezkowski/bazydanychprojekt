@@ -9,4 +9,5 @@ urlpatterns = [
     path('', views.mainPage, name='mainPage'),
     path('adminPanel', views.adminPanel, name='adminPanel'),
     path('addVinyl/', views.addVinyl, name='addVinyl'),
+    path('search/', views.search, name='search'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

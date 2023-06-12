@@ -18,6 +18,11 @@
             <h1>🎵Vinyllo🎵</h1>
         </a>
         <div class="menus">
+            <form method="POST" action="{% url 'search' %}" role="search">
+                {% csrf_token %}
+                <input type="text" name="searchbar"></input>
+                <button type="submit">Wyszukaj</button>
+            </form>
             <a href="/vinyls">Lista dostępnych winyli</a>
             <a href="/adminPanel">Panel Admina</a>
         </div>
@@ -29,6 +34,7 @@
             <p>Wykonawca: {{vinyl.artist}}</p>
             <p>Gatunek: {{vinyl.genre}}</p>
             <p>Opis: {{vinyl.description}}</p>
+            <p>Cena: {{vinyl.price}} zł</p>
             <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="Okładka do {{vinyl.title}}">
         </div>
     </div>

@@ -48,6 +48,7 @@ class Vinyls(models.Model):
     genre = models.CharField(db_column='Genre', max_length=30)  # Field name made lowercase.
     description = models.CharField(db_column='Description', max_length=200)  # Field name made lowercase.
     url = models.CharField(db_column='URL', max_length=200)  # Field name made lowercase.
+    price = models.IntegerField(db_column='Price')
 
     class Meta:
         managed = False
