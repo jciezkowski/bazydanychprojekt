@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from django.db.models import Q
-from .models import Vinyls, Customers
+from django.db.models import Q, Sum, ExpressionWrapper, IntegerField,F
+from .models import Vinyls, Customers,Sales
+from django.db.models.functions import Coalesce
+
 import random
 
 def allVinyls(request):
@@ -46,6 +48,19 @@ def adminPanel(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
+def salesStats(request):
+    template = loader.get_template("salesStats.html")
+    queryset = Vinyls.objects.annotate(
+        sprzedane=Coalesce(Sum('sales__quantity'), 0),
+        total_price=ExpressionWrapper(
+            Coalesce(Sum('sales__quantity') * F('price'), 0),
+            output_field=IntegerField()
+        )
+    ).order_by('-total_price')
+    context = {
+        'stats': queryset,
+    }
+    return HttpResponse(template.render(context, request))
 def addVinyl(request):
     template = loader.get_template("addVinyl.html")
     vinyl = None

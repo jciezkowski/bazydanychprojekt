@@ -134,3 +134,26 @@ a:visited {
 .stopka p{
     font-weight: bold;
 }
+
+.statsTable{
+    margin-top: 20px;
+    border: black 1px solid;
+    font-size: large;
+}
+
+.statsTable tr{
+    border: black 1px solid;
+}
+
+.statsTable td{
+    border-right: black 1px solid;
+    padding: 10px;
+}
+
+.statsTable th{
+    border-right: black 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+  }

@@ -1,4 +1,5 @@
 {% load static %}
+{% load customtags %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -41,6 +42,7 @@
                   <p>Gatunek: {{vinyl.genre}}</p>
                   <p>Opis: {{vinyl.description}}</p>
                   <p>Cena: {{vinyl.price}} zł</p>
+                  <p>Ilość dostępnych sztuk: {{vinyl | get_units}}</p>
                 </div>
             </div>
             {% endfor %}

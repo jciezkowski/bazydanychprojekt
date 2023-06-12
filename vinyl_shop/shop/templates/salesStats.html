@@ -28,28 +28,27 @@
         </div>
     </div>
     <div class="mainPanel">
+        <table class="statsTable">
+            <tr>
+                <th>Tytuł</th>
+                <th>Artysta</th>
+                <th>Gatunek</th>
+                <th>Cena za sztukę (zł) </th>
+                <th>Ilość sprzedanych sztuk</th>
+                <th>Przychód ze sprzedaży (zł) </th>
+            </tr>
+            {% for vinyl in stats %}
+                <tr>
+                    <td>{{vinyl.title}}</td>
+                    <td>{{vinyl.artist}}</td>
+                    <td>{{vinyl.genre}}</td>
+                    <td>{{vinyl.price}}</td>
+                    <td>{{vinyl.sprzedane}}</td>
+                    <td>{{vinyl.total_price}}</td>
 
-        <h2>
-            <a href="/salesStats/">Statystyki Sprzedaży</a>
-        </h2>
-        <div class="formPanel">
-            <h2>Dodaj Płytę</h2>
-            <form action="/addVinyl/" method="GET">
-                <input type="text" name="title" placeholder="Tytuł">
-                <br>
-                <input type="text" name="artist" placeholder="Wykonawca">
-                <br>
-                <input type="text" name="genre" placeholder="Gatunek">
-                <br>
-                <input type="textarea" name="description" placeholder="Opis">
-                <br>
-                <input type="text" name="url" placeholder="Link do okładki">
-                <br>
-                <input type="number" name="price" placeholder="Cena">
-                <br>
-                <button type="submit">Potwierdź</button>
-            </form>
-        </div>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
     <div class="stopka">
         <p>Kontakt</p>
