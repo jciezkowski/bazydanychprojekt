@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-20 13:24:48.869
+-- Last modification date: 2023-06-12 16:31:13.948
 
 -- tables
 -- Table: Customers
@@ -40,7 +40,8 @@ CREATE TABLE Vinyls (
     Artist varchar(100) NOT NULL,
     Genre varchar(30) NOT NULL,
     Description varchar(200) NOT NULL,
-    URL varchar(200) NOT NULL
+    URL varchar(200) NOT NULL,
+    Price int NOT NULL
 );
 
 -- End of file.
