@@ -30,17 +30,19 @@
         </div>
     </div>
     <div class="mainPanel">
-        <h1>Najlepszy wybór</h1>
-        <div class="vinylPanel">
-            {% for vinyl in mainVinyls %}
+        {% if delivery %}
+            <h1>Pomyślnie zarejestrowano dostawę</h1>
             <div class="vinylContainer">
-                <p>{{ vinyl.title }}</p>
-                <p>{{ vinyl.artist }}</p>
-                <p>{{ vinyl.price }} zł</p>
-                <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
+                <p>Tytuł: {{vinyl.title}}</p>
+                <p>Wykonawca: {{vinyl.artist}}</p>
+                <p>Liczba sztuk: {{delivery.unitsdelivered}}</p>
+                <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="Okładka do {{vinyl.title}}">
             </div>
-            {% endfor %}
-        </div>
+        {% else %}
+            <h1>Nie udało się dodać dostawy.</h1>
+            <p>Czy dodałeś już album do bazy?</p>
+            <p>Czy wprowadziłeś poprawne dane?</p>
+        {% endif %}   
     </div>
     <div class="stopka">
         <p>Kontakt</p>

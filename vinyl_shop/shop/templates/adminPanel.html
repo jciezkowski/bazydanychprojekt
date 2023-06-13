@@ -23,8 +23,10 @@
                 <input type="text" name="searchbar"></input>
                 <button type="submit">Wyszukaj</button>
             </form>
+            {% if user.is_superuser %}
+                <a href="/adminPanel">Panel Admina</a>
+            {% endif %}
             <a href="/vinyls">Lista dostępnych winyli</a>
-            <a href="/adminPanel">Panel Admina</a>
         </div>
     </div>
     <div class="mainPanel">
@@ -46,6 +48,18 @@
                 <input type="text" name="url" placeholder="Link do okładki">
                 <br>
                 <input type="number" name="price" placeholder="Cena">
+                <br>
+                <button type="submit">Potwierdź</button>
+            </form>
+        </div>
+        <div class="formPanel">
+            <h2>Zarejestruj dostawę</h2>
+            <form action="/addDelivery/" method="GET">
+                <input type="text" name="title" placeholder="Tytuł">
+                <br>
+                <input type="text" name="artist" placeholder="Wykonawca">
+                <br>
+                <input type="number" name="units" placeholder="Liczba sztuk">
                 <br>
                 <button type="submit">Potwierdź</button>
             </form>

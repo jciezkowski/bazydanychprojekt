@@ -2,31 +2,36 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from django.db.models import Q, Sum, ExpressionWrapper, IntegerField,F
-from .models import Vinyls, Customers,Sales
+from .models import Vinyls, Customers,Sales, Deliveries
 from django.db.models.functions import Coalesce
 from django.db.models.functions import Lower
 from itertools import chain
 import operator
+from datetime import date
 
 import random
 
-def allVinyls(request):        
-    vinyls = Vinyls.objects.all().values()
+def allVinyls(request):
+    vinyls = Vinyls.objects.none()
     if request.method == 'GET':
-        vinyls = Vinyls.objects.none().values()
         genres = request.GET.getlist('genres')
-        for mygenre in genres:
-            vinyls = chain(vinyls, Vinyls.objects.filter(genre=mygenre))
-        if request.GET.get("price_desc"):
-            vinyls = sorted(vinyls, key=operator.attrgetter('price'), reverse=True)        
-        elif request.GET.get("price_asc"):
-            vinyls = sorted(vinyls, key=operator.attrgetter('price'))
-        elif request.GET.get("title"):
-            get_key = operator.attrgetter('title')
-            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
-        elif request.GET.get("artist"):
-            get_key = operator.attrgetter('artist')
-            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
+        if genres:
+            for mygenre in genres:
+                vinyls = chain(vinyls, Vinyls.objects.filter(genre=mygenre))
+        else:
+            vinyls = chain(vinyls, Vinyls.objects.all())
+        sort_method = request.GET.get('sort')
+        if sort_method:
+            if sort_method == "price_desc":
+                vinyls = sorted(vinyls, key=operator.attrgetter('price'), reverse=True)        
+            elif sort_method == "price_asc":
+                vinyls = sorted(vinyls, key=operator.attrgetter('price'))
+            elif sort_method == "title":
+                get_key = operator.attrgetter('title')
+                vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
+            elif sort_method == "artist":
+                get_key = operator.attrgetter('artist')
+                vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
     template = loader.get_template("allVinyls.html")
     context = {
         'vinyls': vinyls,
@@ -96,6 +101,27 @@ def addVinyl(request):
         # Save the object to the database
         vinyl.save()
     context = {
+        'vinyl': vinyl
+    } 
+    return HttpResponse(template.render(context, request))
+
+def addDelivery(request):
+    template = loader.get_template("addDelivery.html")
+    vinyl = None
+    if request.method == 'GET':
+        # Retrieve the form data from the request.POST dictionary
+        title = request.GET.get('title')
+        artist = request.GET.get('artist')
+        units = request.GET.get('units')
+        vinyl = Vinyls.objects.filter(Q(title=title) & Q(artist=artist)).first()
+        if vinyl:
+            newdate = date.today()
+            delivery = Deliveries(dateofdelivery=newdate, vinylid=vinyl, unitsdelivered=units)
+            delivery.save()
+        else:
+            delivery = None
+    context = {
+        'delivery': delivery,
         'vinyl': vinyl
     } 
     return HttpResponse(template.render(context, request))

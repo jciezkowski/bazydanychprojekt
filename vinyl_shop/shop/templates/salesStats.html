@@ -23,8 +23,10 @@
                 <input type="text" name="searchbar"></input>
                 <button type="submit">Wyszukaj</button>
             </form>
+            {% if user.is_superuser %}
+                <a href="/adminPanel">Panel Admina</a>
+            {% endif %}
             <a href="/vinyls">Lista dostępnych winyli</a>
-            <a href="/adminPanel">Panel Admina</a>
         </div>
     </div>
     <div class="mainPanel">

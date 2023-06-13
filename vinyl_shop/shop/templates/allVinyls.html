@@ -25,8 +25,10 @@
                 <input type="text" name="searchbar"></input>
                 <button type="submit">Wyszukaj</button>
             </form>
+            {% if user.is_superuser %}
+                <a href="/adminPanel">Panel Admina</a>
+            {% endif %}
             <a href="/vinyls">Lista dostępnych winyli</a>
-            <a href="/adminPanel">Panel Admina</a>
         </div>
     </div>
     <div class="mainPanel">
@@ -34,10 +36,10 @@
         <div class="sort_filter">
             <form method="GET" action="/vinyls">
                 <div id="form_title">Sortuj według:</div>
-                <input class="sortbt" type="submit" name="price_desc" value="Cena: malejąco"></input><br>
-                <input class="sortbt" type="submit" name="price_asc" value="Cena: rosnąco"></input><br>
-                <input class="sortbt" type="submit" name="title" value="Tytuł: alfabetycznie"></input><br>
-                <input class="sortbt" type="submit" name="artist" value="Wykonawca: alfabetycznie"></input><br>
+                <input type="radio" name="sort" value="price_desc">Cena: malejąco<br>
+                <input type="radio" name="sort" value="price_asc">Cena: rosnąco<br>
+                <input type="radio" name="sort" value="title">Tytuł: alfabetycznie<br>
+                <input type="radio" name="sort" value="artist">Wykonawca: alfabetycznie<br>
                 <div id="form_title">Filtruj według:</div>
                 Gatunek:<br>
                 <input type="checkbox" name="genres" value="Rock" checked>Rock</input><br>
@@ -48,7 +50,7 @@
                 <input type="checkbox" name="genres" value="Post-Rock" checked>Post-Rock</input><br>
                 <input type="checkbox" name="genres" value="Shoegaze" checked>Shoegaze</input><br>
                 <input type="checkbox" name="genres" value="Metal" checked>Metal</input><br>
-                <button type="submit">Filtruj bez sortowania</button>
+                <button type="submit">Zatwierdź</button>
             </form>
         </div>
         <div class="vinylPanel">
