@@ -28,6 +28,7 @@
         </div>
     </div>
     <div class="mainPanel">
+        {% if vinyl %}
         <h1>Pomyślnie dodano</h1>
         <div class="vinylContainer">
             <p>Tytuł: {{vinyl.title}}</p>
@@ -37,6 +38,9 @@
             <p>Cena: {{vinyl.price}} zł</p>
             <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="Okładka do {{vinyl.title}}">
         </div>
+        {%else%}
+        <h2>Problem z dodawaniem, spróbuj ponownie</h2>
+        {%endif%}
     </div>
     <div class="stopka">
         <p>Kontakt</p>

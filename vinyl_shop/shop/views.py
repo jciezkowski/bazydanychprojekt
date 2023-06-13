@@ -83,19 +83,19 @@ def addVinyl(request):
     template = loader.get_template("addVinyl.html")
     vinyl = None
     if request.method == 'GET':
-        # Retrieve the form data from the request.POST dictionary
         title = request.GET.get('title')
         artist = request.GET.get('artist')
         genre = request.GET.get('genre')
         description = request.GET.get('description')
         url = request.GET.get('url')
         price = request.GET.get('price')
-        # Create a new Vinyl object with the form data
-        vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url, price=price)
+        if '' not in [title, artist, genre, description, url,price]:
+            vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url, price=price)
 
-        # Save the object to the database
-        vinyl.save()
-    context = {
-        'vinyl': vinyl
-    } 
-    return HttpResponse(template.render(context, request))
+            vinyl.save()
+            context = {
+                'vinyl': vinyl
+            } 
+            return HttpResponse(template.render(context, request))
+        else:
+            return HttpResponse(template.render({}, request))
