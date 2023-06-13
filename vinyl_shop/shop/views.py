@@ -4,11 +4,31 @@ from django.shortcuts import render
 from django.db.models import Q, Sum, ExpressionWrapper, IntegerField,F
 from .models import Vinyls, Customers,Sales
 from django.db.models.functions import Coalesce
+from django.db.models.functions import Lower
+from itertools import chain
+import operator
 
 import random
 
-def allVinyls(request):
+def allVinyls(request):        
     vinyls = Vinyls.objects.all().values()
+    if request.method == 'GET':
+        vinyls = Vinyls.objects.none().values()
+        genres = request.GET.getlist('genres')
+        for mygenre in genres:
+            vinyls = chain(vinyls, Vinyls.objects.filter(genre=mygenre))
+        if request.GET.get("price_desc"):
+            get_key = operator.attrgetter('price')
+            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower(), reverse=True)        
+        elif request.GET.get("price_asc"):
+            get_key = operator.attrgetter('price')
+            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())        
+        elif request.GET.get("title"):
+            get_key = operator.attrgetter('title')
+            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
+        elif request.GET.get("artist"):
+            get_key = operator.attrgetter('artist')
+            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())
     template = loader.get_template("allVinyls.html")
     context = {
         'vinyls': vinyls,

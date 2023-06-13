@@ -157,3 +157,23 @@ a:visited {
 table {
     border-collapse: collapse;
   }
+
+.sort_filter {
+    margin-left: 5vw;
+    margin-right: auto;
+    background-color: lightgray;
+    border: solid black 2px;
+    border-radius: 3px;
+    padding: 5px;
+    width: 180px;
+}
+
+.sort_filter form .sortbt {
+    width: 180px;
+}
+
+#form_title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}

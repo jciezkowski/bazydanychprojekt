@@ -31,6 +31,26 @@
     </div>
     <div class="mainPanel">
         <h1>Lista winyli</h1>
+        <div class="sort_filter">
+            <form method="GET" action="/vinyls">
+                <div id="form_title">Sortuj według:</div>
+                <input class="sortbt" type="submit" name="price_desc" value="Cena: malejąco"></input><br>
+                <input class="sortbt" type="submit" name="price_asc" value="Cena: rosnąco"></input><br>
+                <input class="sortbt" type="submit" name="title" value="Tytuł: alfabetycznie"></input><br>
+                <input class="sortbt" type="submit" name="artist" value="Wykonawca: alfabetycznie"></input><br>
+                <div id="form_title">Filtruj według:</div>
+                Gatunek:<br>
+                <input type="checkbox" name="genres" value="Rock" checked>Rock</input><br>
+                <input type="checkbox" name="genres" value="Rap/Hip-Hop" checked>Rap/Hip-Hop</input><br>
+                <input type="checkbox" name="genres" value="Jazz" checked>Jazz</input><br>
+                <input type="checkbox" name="genres" value="Pop" checked>Pop</input><br>
+                <input type="checkbox" name="genres" value="Post-Punk" checked>Post-Punk</input><br>
+                <input type="checkbox" name="genres" value="Post-Rock" checked>Post-Rock</input><br>
+                <input type="checkbox" name="genres" value="Shoegaze" checked>Shoegaze</input><br>
+                <input type="checkbox" name="genres" value="Metal" checked>Metal</input><br>
+                <button type="submit">Filtruj bez sortowania</button>
+            </form>
+        </div>
         <div class="vinylPanel">
             <!-- Loop through books -->
             {% for vinyl in vinyls %}
@@ -42,7 +62,7 @@
                   <p>Gatunek: {{vinyl.genre}}</p>
                   <p>Opis: {{vinyl.description}}</p>
                   <p>Cena: {{vinyl.price}} zł</p>
-                  <p>Ilość dostępnych sztuk: {{vinyl | get_units}}</p>
+                  {% comment %} <p>Ilość dostępnych sztuk: {{vinyl | get_units}}</p> {% endcomment %}
                 </div>
             </div>
             {% endfor %}
