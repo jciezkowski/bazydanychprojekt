@@ -18,11 +18,9 @@ def allVinyls(request):
         for mygenre in genres:
             vinyls = chain(vinyls, Vinyls.objects.filter(genre=mygenre))
         if request.GET.get("price_desc"):
-            get_key = operator.attrgetter('price')
-            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower(), reverse=True)        
+            vinyls = sorted(vinyls, key=operator.attrgetter('price'), reverse=True)        
         elif request.GET.get("price_asc"):
-            get_key = operator.attrgetter('price')
-            vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())        
+            vinyls = sorted(vinyls, key=operator.attrgetter('price'))
         elif request.GET.get("title"):
             get_key = operator.attrgetter('title')
             vinyls = sorted(vinyls, key=lambda x: get_key(x).lower())

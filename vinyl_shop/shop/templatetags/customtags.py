@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter
 def get_units(vinyl):
-    vid = vinyl.get('vinylid')
+    vid = vinyl.vinylid
     unitsDelivered = Deliveries.objects.filter(vinylid=vid).aggregate(total=Sum('unitsdelivered'))['total']
     if unitsDelivered is None:
         unitsDelivered = 0
