@@ -14,9 +14,11 @@
                 <img src="{% static 'img/vinyl.png'%}" alt="">
             </div>
         </a>
-        <a href="/">
-            <h1>🎵Vinyllo🎵</h1>
-        </a>
+        <div class="store_name">
+            <a href="/">
+                <h1>🎵Vinyllo🎵</h1>
+            </a>
+        </div>
         <div class="menus">
             <form method="POST" action="{% url 'search' %}" role="search">
                 {% csrf_token %}
@@ -34,9 +36,9 @@
         <div class="vinylPanel">
             {% for vinyl in mainVinyls %}
             <div class="vinylContainer">
-                <p>{{ vinyl.title }}</p>
-                <p>{{ vinyl.artist }}</p>
-                <p>{{ vinyl.price }} zł</p>
+                <div class="vinyl_title">{{ vinyl.title }}</div>
+                <p class="vinyl_artist">{{ vinyl.artist }}</p>
+                <p class="vinyl_price">{{ vinyl.price }} zł</p>
                 <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
             </div>
             {% endfor %}

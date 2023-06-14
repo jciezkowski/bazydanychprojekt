@@ -16,9 +16,11 @@
                 <img src="{% static 'img/vinyl.png'%}" alt="">
             </div>
         </a>
-        <a href="/">
-            <h1>🎵Vinyllo🎵</h1>
-        </a>
+        <div class="store_name">
+            <a href="/">
+                <h1>🎵Vinyllo🎵</h1>
+            </a>
+        </div>
         <div class="menus">
             <form method="POST" action="{% url 'search' %}" role="search">
                 {% csrf_token %}
@@ -31,33 +33,33 @@
             <a href="/vinyls">Lista dostępnych winyli</a>
         </div>
     </div>
+    <div class="sort_filter">
+        <form method="GET" action="/vinyls">
+            <div id="form_title">Sortuj według:</div>
+            <input type="radio" name="sort" value="price_desc">Cena: malejąco<br>
+            <input type="radio" name="sort" value="price_asc">Cena: rosnąco<br>
+            <input type="radio" name="sort" value="title">Tytuł: alfabetycznie<br>
+            <input type="radio" name="sort" value="artist">Wykonawca: alfabetycznie<br>
+            <div id="form_title">Filtruj według:</div>
+            Gatunek:<br>
+            <input type="checkbox" name="genres" value="Rock" checked>Rock</input><br>
+            <input type="checkbox" name="genres" value="Rap/Hip-Hop" checked>Rap/Hip-Hop</input><br>
+            <input type="checkbox" name="genres" value="Jazz" checked>Jazz</input><br>
+            <input type="checkbox" name="genres" value="Pop" checked>Pop</input><br>
+            <input type="checkbox" name="genres" value="Post-Punk" checked>Post-Punk</input><br>
+            <input type="checkbox" name="genres" value="Post-Rock" checked>Post-Rock</input><br>
+            <input type="checkbox" name="genres" value="Shoegaze" checked>Shoegaze</input><br>
+            <input type="checkbox" name="genres" value="Metal" checked>Metal</input><br>
+            <button type="submit">Zatwierdź</button>
+        </form>
+    </div>
     <div class="mainPanel">
         <h1>Lista winyli</h1>
-        <div class="sort_filter">
-            <form method="GET" action="/vinyls">
-                <div id="form_title">Sortuj według:</div>
-                <input type="radio" name="sort" value="price_desc">Cena: malejąco<br>
-                <input type="radio" name="sort" value="price_asc">Cena: rosnąco<br>
-                <input type="radio" name="sort" value="title">Tytuł: alfabetycznie<br>
-                <input type="radio" name="sort" value="artist">Wykonawca: alfabetycznie<br>
-                <div id="form_title">Filtruj według:</div>
-                Gatunek:<br>
-                <input type="checkbox" name="genres" value="Rock" checked>Rock</input><br>
-                <input type="checkbox" name="genres" value="Rap/Hip-Hop" checked>Rap/Hip-Hop</input><br>
-                <input type="checkbox" name="genres" value="Jazz" checked>Jazz</input><br>
-                <input type="checkbox" name="genres" value="Pop" checked>Pop</input><br>
-                <input type="checkbox" name="genres" value="Post-Punk" checked>Post-Punk</input><br>
-                <input type="checkbox" name="genres" value="Post-Rock" checked>Post-Rock</input><br>
-                <input type="checkbox" name="genres" value="Shoegaze" checked>Shoegaze</input><br>
-                <input type="checkbox" name="genres" value="Metal" checked>Metal</input><br>
-                <button type="submit">Zatwierdź</button>
-            </form>
-        </div>
         <div class="vinylPanel">
             <!-- Loop through books -->
             {% for vinyl in vinyls %}
             <div class="vinylContainer">
-              <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
+              <img class="vinylinlist" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
                 <div class="infoPanel">
                   <p>Tytuł: {{vinyl.title}}</p>
                   <p>Wykonawca: {{vinyl.artist}}</p>
