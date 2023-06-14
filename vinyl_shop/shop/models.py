@@ -27,7 +27,7 @@ class Deliveries(models.Model):
     class Meta:
         managed = False
         db_table = 'Deliveries'
-
+        
 
 class Sales(models.Model):
     saleid = models.AutoField(db_column='SaleID', primary_key=True)  # Field name made lowercase.
