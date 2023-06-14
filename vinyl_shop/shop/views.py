@@ -47,14 +47,6 @@ def search(request):
     else:
         return render(request, 'search.html', {})
 
-def clients(request):
-    allCustomers = Customers.objects.all().values()
-    template = loader.get_template("allCustomers.html")
-    context = {
-        'allCustomers': allCustomers,
-    }
-    return HttpResponse(template.render(context,request))
-
 def mainPage(request):
     template = loader.get_template("main.html")
     
@@ -76,7 +68,7 @@ def salesStats(request):
     queryset = Vinyls.objects.annotate(
         sprzedane=Coalesce(Sum('sales__quantity'), 0),
         total_price=ExpressionWrapper(
-            Coalesce(Sum('sales__quantity') * F('price'), 0),
+            Coalesce(Sum(F('sales__quantity') * F('sales__price')), 0),
             output_field=IntegerField()
         )
     ).order_by('-total_price')
@@ -118,9 +110,13 @@ def addDelivery(request):
             newdate = date.today()
             delivery = Deliveries(dateofdelivery=newdate, vinylid=vinyl, unitsdelivered=units)
             delivery.save()
+            context = {
+                'delivery': delivery,
+                'vinyl': vinyl
+            }
+            return HttpResponse(template.render(context, request))
         else:
             return HttpResponse(template.render({}, request))
-        
 def basket(request):
     template = loader.get_template("basket.html")
     myvinylid = request.GET.get("buy")
@@ -146,7 +142,7 @@ def purchased(request):
             customer.save()
         quantity = request.GET.get('quantity')
         if int(quantity) <= get_units(vinyl):
-            sale = Sales(customerid=customer, vinylid=vinyl, dateoftransaction=newdate, quantity=int(quantity))
+            sale = Sales(customerid=customer, vinylid=vinyl, dateoftransaction=newdate, quantity=int(quantity),price=vinyl.price)
             sale.save()
             return HttpResponse(template.render({'vinyl': vinyl}, request))
         else:

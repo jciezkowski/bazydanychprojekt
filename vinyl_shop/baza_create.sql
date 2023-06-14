@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-06-12 16:31:13.948
+-- Last modification date: 2023-06-14 06:37:44.841
 
 -- tables
 -- Table: Customers
@@ -27,6 +27,7 @@ CREATE TABLE Sales (
     VinylID int NOT NULL,
     DateOfTransaction datetime NOT NULL,
     Quantity int NOT NULL,
+    Price int NOT NULL,
     CONSTRAINT Sales_Vinyls FOREIGN KEY (VinylID)
     REFERENCES Vinyls (VinylID),
     CONSTRAINT Sales_Customers FOREIGN KEY (CustomerID)

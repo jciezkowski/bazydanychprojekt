@@ -5,7 +5,6 @@ from . import views
 
 urlpatterns = [
     path('vinyls/', views.allVinyls, name='allVinyls'),
-    path('clients/', views.clients, name='clients'),
     path('', views.mainPage, name='mainPage'),
     path('adminPanel', views.adminPanel, name='adminPanel'),
     path('addVinyl/', views.addVinyl, name='addVinyl'),

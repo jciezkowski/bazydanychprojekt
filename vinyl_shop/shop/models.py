@@ -35,7 +35,8 @@ class Sales(models.Model):
     vinylid = models.ForeignKey('Vinyls', models.DO_NOTHING, db_column='VinylID')  # Field name made lowercase.
     dateoftransaction = models.DateTimeField(db_column='DateOfTransaction')  # Field name made lowercase.
     quantity = models.IntegerField(db_column='Quantity')  # Field name made lowercase.
-
+    price = models.IntegerField(db_column='Price')
+    
     class Meta:
         managed = False
         db_table = 'Sales'
