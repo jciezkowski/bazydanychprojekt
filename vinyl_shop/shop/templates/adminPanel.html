@@ -14,9 +14,11 @@
                 <img src="{% static 'img/vinyl.png'%}" alt="">
             </div>
         </a>
-        <a href="/">
-            <h1>🎵Vinyllo🎵</h1>
-        </a>
+        <div class="store_name">
+            <a href="/">
+                <h1>🎵Vinyllo🎵</h1>
+            </a>
+        </div>
         <div class="menus">
             <form method="POST" action="{% url 'search' %}" role="search">
                 {% csrf_token %}
@@ -30,7 +32,6 @@
         </div>
     </div>
     <div class="mainPanel">
-
         <h2>
             <a href="/salesStats/">Statystyki Sprzedaży</a>
         </h2>

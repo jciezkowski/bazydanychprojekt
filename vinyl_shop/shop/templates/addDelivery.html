@@ -14,9 +14,11 @@
                 <img src="{% static 'img/vinyl.png'%}" alt="">
             </div>
         </a>
-        <a href="/">
-            <h1>🎵Vinyllo🎵</h1>
-        </a>
+        <div class="store_name">
+            <a href="/">
+                <h1>🎵Vinyllo🎵</h1>
+            </a>
+        </div>
         <div class="menus">
             <form method="POST" action="{% url 'search' %}" role="search">
                 {% csrf_token %}
@@ -39,7 +41,7 @@
                 <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="Okładka do {{vinyl.title}}">
             </div>
         {% else %}
-            <h1>Nie udało się dodać dostawy.</h1>
+            <h1>Nie udało się zarejestrować dostawy.</h1>
             <p>Czy dodałeś już album do bazy?</p>
             <p>Czy wprowadziłeś poprawne dane?</p>
         {% endif %}   

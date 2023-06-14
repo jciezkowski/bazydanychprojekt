@@ -1,3 +1,8 @@
+html {
+    --text-color-initial: antiquewhite;
+    --text-color-final: rgb(171, 136, 89);
+}
+
 @keyframes example{
     from{  
         transform: rotate(0); 
@@ -8,6 +13,12 @@
     
         transform: rotate(360deg);}
 }
+
+@keyframes color-change {
+    0% {background-color: var(--text-color-initial);}
+    100% {background-color: var(--text-color-final);}
+}
+
 #animate{
     animation-name: example;
     animation-duration: 5s;
@@ -27,70 +38,6 @@ a{
 
 a:visited {
     color: black;
-  }
-
-.header{
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    display: flex;
-    background-color: lightgrey;
-    margin:0;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo{
-    margin-left:20px;
-}
-
-.logo img{
-    width: 40px;
-    height: auto;
-}
-
-.menus {
-    margin-right: 10px;
-}
-
-.menus a{
-    padding-right: 20px;
-}
-
-.mainPanel{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.vinylPanel{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-
-.vinylContainer{
-    background-color: antiquewhite;
-    width: 20vw;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-
-.vinyl{
-    width: 15vw;
-    height: auto;
-    padding: 25px;
 }
 
 .formPanel{
@@ -123,6 +70,50 @@ a:visited {
 
 .formPanel form button{
     align-self: flex-end;
+}
+
+#form_title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    background-color: lightgrey;
+    margin:0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    margin-left:20px;
+}
+
+.logo img{
+    width: 40px;
+    height: auto;
+}
+
+.menus {
+    margin-right: 10px;
+}
+
+.menus a{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding-right: 20px;
+}
+
+.mainPanel{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .stopka{
@@ -163,21 +154,96 @@ table {
   }
 
 .sort_filter {
-    margin-left: 5vw;
-    margin-right: auto;
+    margin-left: 2vw;
+    margin-top: 70px;
+    position: fixed;
     background-color: lightgray;
     border: solid black 2px;
     border-radius: 3px;
     padding: 5px;
-    width: 200px;
+    width: 14.5vw;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.sort_filter form .sortbt {
-    width: 180px;
-}
-
-#form_title {
-    width: fit-content;
+.store_name {
+    width: max-content;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.vinylPanel{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.vinyl_title {
+    width: fit-content;
+    height: 7vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 0.1vw;
+    font-size: 2vw;
+}
+
+.vinyl_artist {
+    width: fit-content;
+    height: 3vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 0.1vw;
+    font-size: 2vw;
+}
+
+.vinyl_price {
+    font-size: 1vw;
+}
+
+
+.vinylContainer{
+    background-color: antiquewhite;
+    width: 20vw;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: solid black 3px;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.vinylContainer:hover {
+    cursor: pointer;
+    animation: color-change 2s forwards;
+}
+
+.vinyl{
+    width: 15vw;
+    height: 15vw;
+    padding: 1vw;
+    border: solid black 2px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.infoPanel {
+    margin-left: 5px;
+    width: 70%;
+}
+
+.vinylinlist {
+    height: 70%;
+    width: auto;
+    padding: 1vw;
+    border: solid black 2px;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: white;
 }
