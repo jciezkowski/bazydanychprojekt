@@ -4,4 +4,4 @@ Temat: sklep kolekcjonerski z płytami winylowymi
 
 Technologie: SQLite, Django, Python
 
-Opis projektu zawarta w pliku: Dokumentacja Projektu.pdf
+Opis projektu zawarty w pliku: Dokumentacja Projektu.pdf
