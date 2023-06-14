@@ -11,13 +11,13 @@ CREATE TABLE Customers (
 );
 
 -- Table: Deliveries
-CREATE TABLE Deliveries (
-    DateOfDelivery datetime NOT NULL,
-    VinylID int NOT NULL,
-    UnitsDelivered int NOT NULL,
-    CONSTRAINT Deliveries_pk PRIMARY KEY (DateOfDelivery,VinylID),
-    CONSTRAINT Deliveries_Vinyls FOREIGN KEY (VinylID)
-    REFERENCES Vinyls (VinylID)
+CREATE TABLE "Deliveries" (
+	"DeliveryID"	INTEGER NOT NULL,
+	"DateOfDelivery"	datetime NOT NULL,
+	"VinylID"	int NOT NULL,
+	"UnitsDelivered"	int NOT NULL,
+	CONSTRAINT "Deliveries_Vinyls" FOREIGN KEY("VinylID") REFERENCES "Vinyls"("VinylID"),
+	PRIMARY KEY("DeliveryID" AUTOINCREMENT)
 );
 
 -- Table: Sales

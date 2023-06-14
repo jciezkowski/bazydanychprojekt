@@ -21,7 +21,8 @@ class Customers(models.Model):
 
 
 class Deliveries(models.Model):
-    dateofdelivery = models.DateTimeField(db_column='DateOfDelivery', primary_key=True)  # Field name made lowercase. The composite primary key (DateOfDelivery, VinylID) found, that is not supported. The first column is selected.
+    deliveryid = models.AutoField(db_column='DeliveryID', primary_key=True)
+    dateofdelivery = models.DateTimeField(db_column='DateOfDelivery')  # Field name made lowercase. The composite primary key (DateOfDelivery, VinylID) found, that is not supported. The first column is selected.
     vinylid = models.ForeignKey('Vinyls', models.DO_NOTHING, db_column='VinylID')  # Field name made lowercase.
     unitsdelivered = models.IntegerField(db_column='UnitsDelivered')  # Field name made lowercase.
 
