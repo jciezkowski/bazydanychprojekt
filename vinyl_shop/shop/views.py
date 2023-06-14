@@ -96,14 +96,15 @@ def addVinyl(request):
         url = request.GET.get('url')
         price = request.GET.get('price')
         # Create a new Vinyl object with the form data
-        vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url, price=price)
-
-        # Save the object to the database
-        vinyl.save()
-    context = {
-        'vinyl': vinyl
-    } 
-    return HttpResponse(template.render(context, request))
+        if '' not in [title, artist, genre, description, url,price]:
+            vinyl = Vinyls(title=title, artist=artist, genre=genre, description=description, url=url, price=price)
+            vinyl.save()
+            context = {
+                'vinyl': vinyl
+            } 
+            return HttpResponse(template.render(context, request))
+        else:
+            return HttpResponse(template.render({}, request))
 
 def addDelivery(request):
     template = loader.get_template("addDelivery.html")
