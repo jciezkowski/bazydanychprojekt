@@ -6,7 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+from django.db.models import Sum
 
 class Customers(models.Model):
     customerid = models.AutoField(db_column='CustomerID', primary_key=True)  # Field name made lowercase.
@@ -49,7 +49,21 @@ class Vinyls(models.Model):
     description = models.CharField(db_column='Description', max_length=200)  # Field name made lowercase.
     url = models.CharField(db_column='URL', max_length=200)  # Field name made lowercase.
     price = models.IntegerField(db_column='Price')
-
+    
+    @property
+    def is_available(self):
+        return get_units(self) > 0
+    
     class Meta:
         managed = False
         db_table = 'Vinyls'
+
+def get_units(vinyl):
+    vid = vinyl.vinylid
+    unitsDelivered = Deliveries.objects.filter(vinylid=vid).aggregate(total=Sum('unitsdelivered'))['total']
+    if unitsDelivered is None:
+        unitsDelivered = 0
+    unitsSold = Sales.objects.filter(vinylid=vid).aggregate(total=Sum('quantity'))['total']
+    if unitsSold is None:
+        unitsSold = 0
+    return unitsDelivered - unitsSold

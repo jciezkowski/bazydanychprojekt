@@ -57,21 +57,23 @@
         <h1>Lista winyli</h1>
         <div class="vinylPanel">
             {% for vinyl in vinyls %}
-            <div class="vinylContainer">
-              <img class="vinylinlist" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
-                <div class="infoPanel">
-                  <p>Tytuł: {{vinyl.title}}</p>
-                  <p>Wykonawca: {{vinyl.artist}}</p>
-                  <p>Gatunek: {{vinyl.genre}}</p>
-                  <p>Opis: {{vinyl.description}}</p>
-                  <p>Cena: {{vinyl.price}} zł</p>
-                  <p>Ilość dostępnych sztuk: {{vinyl | get_units}}</p>
-                  <form method="GET" action="/basket">
-                    <input type="checkbox" name="buy" value={{ vinyl.vinylid }} style="display: none;" checked>
-                    <button type="submit">KUP</button>
-                  </form>
-                </div>
-            </div>
+                {% if vinyl.is_available %}
+                    <div class="vinylContainer">
+                    <img class="vinylinlist" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
+                        <div class="infoPanel">
+                        <p>Tytuł: {{vinyl.title}}</p>
+                        <p>Wykonawca: {{vinyl.artist}}</p>
+                        <p>Gatunek: {{vinyl.genre}}</p>
+                        <p>Opis: {{vinyl.description}}</p>
+                        <p>Cena: {{vinyl.price}} zł</p>
+                        <p>Ilość dostępnych sztuk: {{vinyl | get_units}}</p>
+                        <form method="GET" action="/basket">
+                            <input type="checkbox" name="buy" value={{ vinyl.vinylid }} style="display: none;" checked>
+                            <button type="submit">KUP</button>
+                        </form>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
