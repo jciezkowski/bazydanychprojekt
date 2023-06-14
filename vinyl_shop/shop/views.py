@@ -88,7 +88,6 @@ def addVinyl(request):
     template = loader.get_template("addVinyl.html")
     vinyl = None
     if request.method == 'GET':
-        # Retrieve the form data from the request.POST dictionary
         title = request.GET.get('title')
         artist = request.GET.get('artist')
         genre = request.GET.get('genre')
@@ -120,9 +119,4 @@ def addDelivery(request):
             delivery = Deliveries(dateofdelivery=newdate, vinylid=vinyl, unitsdelivered=units)
             delivery.save()
         else:
-            delivery = None
-    context = {
-        'delivery': delivery,
-        'vinyl': vinyl
-    } 
-    return HttpResponse(template.render(context, request))
+            return HttpResponse(template.render({}, request))
