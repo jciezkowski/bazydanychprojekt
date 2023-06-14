@@ -32,21 +32,12 @@
         </div>
     </div>
     <div class="mainPanel">
-        <h1>Najlepszy wybór</h1>
-        <div class="vinylPanel">
-            {% for vinyl in mainVinyls %}
-            <div class="vinylContainer">
-                <div class="vinyl_title">{{ vinyl.title }}</div>
-                <p class="vinyl_artist">{{ vinyl.artist }}</p>
-                <p class="vinyl_price">{{ vinyl.price }} zł</p>
-                <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
-                <form method="GET" action="/basket">
-                    <input type="checkbox" name="buy" value={{ vinyl.vinylid }} style="display: none;" checked>
-                    <button type="submit">KUP</button>
-                </form>
-            </div>
-            {% endfor %}
-        </div>
+        {% if vinyl %}
+            <h1>Gratulujemy zakupu!</h1>
+        {% else %}
+            <h1>Coś poszło nie tak</h1>
+        {% endif %}
+            <a href='/'>powrót na stronę główną</a>
     </div>
     <div class="stopka">
         <p>Kontakt</p>

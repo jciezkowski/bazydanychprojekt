@@ -120,3 +120,44 @@ def addDelivery(request):
             delivery.save()
         else:
             return HttpResponse(template.render({}, request))
+        
+def basket(request):
+    template = loader.get_template("basket.html")
+    myvinylid = request.GET.get("buy")
+    if request.method == 'GET':
+        vinyl = Vinyls.objects.filter(vinylid=myvinylid).first()
+        context = {
+            'vinyl': vinyl
+        }
+        return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({}, request))
+
+def purchased(request):
+    template = loader.get_template("purchased.html")
+    vinyl = Vinyls.objects.filter(vinylid=request.GET.get("buy")).first()
+    if request.method == 'GET':
+        newdate = date.today()
+        name = request.GET.get('firstname')
+        surname = request.GET.get('lastname')
+        mail = request.GET.get('mail')
+        customer = Customers.objects.filter(Q(name=name) & Q(surname=surname) & Q(address=mail)).first()
+        if not customer:
+            customer = Customers(name=name, surname=surname, address=mail)
+            customer.save()
+        quantity = request.GET.get('quantity')
+        if int(quantity) <= get_units(vinyl):
+            sale = Sales(customerid=customer, vinylid=vinyl, dateoftransaction=newdate, quantity=int(quantity))
+            sale.save()
+            return HttpResponse(template.render({'vinyl': vinyl}, request))
+        else:
+            return HttpResponse(template.render({}, request))
+        
+def get_units(vinyl):
+    vid = vinyl.vinylid
+    unitsDelivered = Deliveries.objects.filter(vinylid=vid).aggregate(total=Sum('unitsdelivered'))['total']
+    if unitsDelivered is None:
+        unitsDelivered = 0
+    unitsSold = Sales.objects.filter(vinylid=vid).aggregate(total=Sum('quantity'))['total']
+    if unitsSold is None:
+        unitsSold = 0
+    return unitsDelivered - unitsSold

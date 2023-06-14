@@ -206,6 +206,7 @@ table {
 
 
 .vinylContainer{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: antiquewhite;
     width: 20vw;
     margin: 5px;
@@ -216,10 +217,10 @@ table {
     border: solid black 3px;
     border-radius: 10px;
     height: fit-content;
+    padding: 3px;
 }
 
 .vinylContainer:hover {
-    cursor: pointer;
     animation: color-change 2s forwards;
 }
 

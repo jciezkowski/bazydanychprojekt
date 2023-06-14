@@ -1,4 +1,5 @@
 {% load static %}
+{% load customtags %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -32,21 +33,33 @@
         </div>
     </div>
     <div class="mainPanel">
-        <h1>Najlepszy wybór</h1>
-        <div class="vinylPanel">
-            {% for vinyl in mainVinyls %}
+        {% if vinyl %}
+            <h1>Kup winyl</h1>
             <div class="vinylContainer">
                 <div class="vinyl_title">{{ vinyl.title }}</div>
                 <p class="vinyl_artist">{{ vinyl.artist }}</p>
                 <p class="vinyl_price">{{ vinyl.price }} zł</p>
+                <p class="vinyl_price">Ilość dostępnych sztuk: {{vinyl | get_units}}</p>
                 <img class="vinyl" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">
-                <form method="GET" action="/basket">
+            </div>
+            <div class="formPanel">
+                <h2>Szczegóły transakcji</h2>
+                <form action="/purchased/" method="GET">
                     <input type="checkbox" name="buy" value={{ vinyl.vinylid }} style="display: none;" checked>
-                    <button type="submit">KUP</button>
+                    <input type="text" name="firstname" placeholder="Imię">
+                    <br>
+                    <input type="text" name="lastname" placeholder="Nazwisko">
+                    <br>
+                    <input type="text" name="mail" placeholder="mail">
+                    <br>
+                    <input type="number" name="quantity" placeholder="Liczba egzemplarzy" max="{{vinyl | get_units }}">
+                    <br>
+                    <button type="submit">Potwierdź</button>
                 </form>
             </div>
-            {% endfor %}
-        </div>
+        {% else %}
+            <h1>Wystąpił błąd</h1>
+        {% endif %}
     </div>
     <div class="stopka">
         <p>Kontakt</p>
