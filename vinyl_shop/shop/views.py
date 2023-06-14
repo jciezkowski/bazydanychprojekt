@@ -136,15 +136,28 @@ def purchased(request):
         name = request.GET.get('firstname')
         surname = request.GET.get('lastname')
         mail = request.GET.get('mail')
+        password = request.GET.get('password')
         customer = Customers.objects.filter(Q(name=name) & Q(surname=surname) & Q(address=mail)).first()
         if not customer:
-            customer = Customers(name=name, surname=surname, address=mail)
+            customer = Customers(name=name, surname=surname, address=mail, password=password)
             customer.save()
+        elif customer.password != password:
+            text = "Podano złe hasło"
+            context = {
+                'text': text
+            }
+            return HttpResponse(template.render(context, request))
         quantity = request.GET.get('quantity')
         if int(quantity) <= get_units(vinyl):
             sale = Sales(customerid=customer, vinylid=vinyl, dateoftransaction=newdate, quantity=int(quantity),price=vinyl.price)
             sale.save()
-            return HttpResponse(template.render({'vinyl': vinyl}, request))
+            total = int(quantity) * vinyl.price
+            text = "Łączna kwota zakupu: " + str(total) + " zł"
+            context = {
+                'vinyl': vinyl,
+                'text': text
+            }
+            return HttpResponse(template.render(context, request))
         else:
             return HttpResponse(template.render({}, request))
         

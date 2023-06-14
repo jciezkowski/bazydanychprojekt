@@ -34,6 +34,9 @@
     <div class="mainPanel">
         {% if vinyl %}
             <h1>Gratulujemy zakupu!</h1>
+            <p>{{text}}</p>
+        {% elif text %}
+            <h1>{{text}}</h1>
         {% else %}
             <h1>Coś poszło nie tak</h1>
         {% endif %}

@@ -13,7 +13,8 @@ class Customers(models.Model):
     name = models.CharField(db_column='Name', max_length=30)  # Field name made lowercase.
     surname = models.CharField(db_column='Surname', max_length=50)  # Field name made lowercase.
     address = models.CharField(db_column='Address', max_length=100)  # Field name made lowercase.
-
+    password = models.CharField(db_column='Password', max_length=30)
+    
     class Meta:
         managed = False
         db_table = 'Customers'
