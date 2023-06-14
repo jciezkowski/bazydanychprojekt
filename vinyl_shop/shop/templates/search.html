@@ -33,22 +33,24 @@
     </div>
     <div class="mainPanel">
         {% if query %}
-            <div>
-                {% if posts %}
-                    <h1>Znalezione produkty spełniające kryteria:</h1>
-                    <div class="vinylPanel">
-                    {% for post in posts %}
-                        <div class="vinylContainer">
-                            <p>{{ post.title }}</p>
-                            <p>{{ post.artist }}</p>
-                            <img class="vinyl" src="{% static 'img/'|add:post.url %}" alt="{{ post.title }}">
-                        </div>
-                    {% endfor %}
+            {% if posts %}
+                <h1>Znalezione produkty spełniające kryteria:</h1>
+                <div class="vinylPanel">
+                {% for post in posts %}
+                    <div class="vinylContainer">
+                        <p class="vinyl_title">{{ post.title }}</p>
+                        <p class="vinyl_artist">{{ post.artist }}</p>
+                        <img class="vinyl" src="{% static 'img/'|add:post.url %}" alt="{{ post.title }}">
+                        <form method="GET" action="/basket">
+                            <input type="checkbox" name="buy" style="display: none;" value={{ post.vinylid }} checked>
+                            <button type="submit">KUP</button>
+                        </form>
                     </div>
-                {% else %}
-                    <h1>Nie znaleziono poszukiwanej frazy</h1>
-                {% endif %}
-            </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <h1>Nie znaleziono poszukiwanej frazy</h1>
+            {% endif %}
         {% else %}
             <h1>Proszę wprowadzić poprawne wyszukanie</h1>
         {% endif %}
