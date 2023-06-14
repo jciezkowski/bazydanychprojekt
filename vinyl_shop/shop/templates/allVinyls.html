@@ -56,7 +56,6 @@
     <div class="mainPanel">
         <h1>Lista winyli</h1>
         <div class="vinylPanel">
-            <!-- Loop through books -->
             {% for vinyl in vinyls %}
             <div class="vinylContainer">
               <img class="vinylinlist" src="{% static 'img/'|add:vinyl.url %}" alt="{{ vinyl.title }}">

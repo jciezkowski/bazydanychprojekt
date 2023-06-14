@@ -1,7 +1,7 @@
-skład grupy: Dawid Kardacz, Jakub Pilch, Jan Ciężkowski
+Skład grupy: Dawid Kardacz, Jakub Pilch, Jan Ciężkowski
 
-temat: serwis oraz sklep kolekcjonerski z płytami winylowymi
+Temat: sklep kolekcjonerski z płytami winylowymi
 
-link do repozytorium: https://github.com/jciezkowski/bazydanychprojekt
+Technologie: SQLite, Django, Python
 
-technologie: SQLite, Django
+Opis projektu zawart w pliku: Dokumentacja Projektu.pdf
